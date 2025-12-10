@@ -12,10 +12,14 @@
                     <input type="text" wire:model.live.debounce.300ms="search" placeholder="Buscar productos..."
                         class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" />
                 </div>
-                <livewire:edit-product />
+                <div class="flex gap-2 items-center">
+                    <livewire:edit-product />
                 <livewire:view-product />
                 <livewire:delete-product />
+                <livewire:stock-movement />
                 <livewire:create-product />
+                </div>
+                
             </div>
         </div>
 
@@ -288,6 +292,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- Historial de Movimientos -->
+        <livewire:inventory-history />
 
         <!-- Stats Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
