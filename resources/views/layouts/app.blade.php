@@ -18,28 +18,26 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
-        <x-banner />
+    <x-banner />
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+    <div class="min-h-screen bg-gray-100 flex flex-col">
+        @livewire('navigation-menu')
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+        <!-- Contenedor principal que ocupa todo el espacio restante -->
+        <div class="flex flex-1">
+            <!-- Sidebar - se adapta al alto disponible -->
+            <div class="flex-shrink-0">
+                @livewire('components.sidebar')
+            </div>
 
-            <!-- Page Content -->
-            <main>
+            <!-- Contenido principal que ocupa el espacio restante -->
+            <main class="flex-1 overflow-auto">
                 {{ $slot }}
             </main>
         </div>
+    </div>
 
-        @stack('modals')
-
-        @livewireScripts
-    </body>
+    @stack('modals')
+    @livewireScripts
+</body>
 </html>

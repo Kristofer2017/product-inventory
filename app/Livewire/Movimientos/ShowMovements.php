@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Movimientos;
 
 use Livewire\Component;
 use App\Models\InventoryMovement;
 
-class InventoryHistory extends Component
+class ShowMovements extends Component
 {
     public $searchMovement = '';
     public $sortField = 'created_at';
@@ -34,6 +34,6 @@ class InventoryHistory extends Component
             ->orderBy($this->sortField, $this->sortDirection)
             ->get();
 
-        return view('livewire.inventory-history', ['movements' => $movements]);
+        return view('livewire.movimientos.show-movements', ['movements' => $movements]);
     }
 }

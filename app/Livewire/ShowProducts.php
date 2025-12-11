@@ -10,7 +10,11 @@ class ShowProducts extends Component
     public $search = '';
     public $sortField = 'nombre';
     public $sortDirection = 'asc';
-    protected $listeners = ['productCreated' => '$refresh', 'productUpdated' => '$refresh', 'productDeleted' => '$refresh'];
+    protected $listeners = [
+        'productCreated' => '$refresh', 
+        'productUpdated' => '$refresh', 
+        'productDeleted' => '$refresh'
+    ];
 
     public function sortBy($field)
     {
@@ -27,7 +31,7 @@ class ShowProducts extends Component
         $products = Product::query()
             ->when($this->search, function ($query) {
                 $query->where('nombre', 'like', '%' . $this->search . '%')
-                      ->orWhere('descripcion', 'like', '%' . $this->search . '%');
+                    ->orWhere('descripcion', 'like', '%' . $this->search . '%');
             })
             ->orderBy($this->sortField, $this->sortDirection)
             ->get();
