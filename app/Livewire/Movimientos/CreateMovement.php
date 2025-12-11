@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Movimientos;
 
 use Livewire\Component;
 use App\Models\Product;
 use App\Models\InventoryMovement;
 
-class StockMovement extends Component
+class CreateMovement extends Component
 {
     public $productId;
     public $type = 'entrada';
@@ -90,6 +90,6 @@ class StockMovement extends Component
     public function render()
     {
         $products = Product::orderBy('nombre')->get();
-        return view('livewire.stock-movement', ['products' => $products]);
+        return view('livewire.movimientos.create-movement', ['products' => $products]);
     }
 }

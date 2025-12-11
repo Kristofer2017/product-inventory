@@ -24,15 +24,24 @@ class ShowMovements extends Component
 
     public function render()
     {
-        $movements = InventoryMovement::with('product')
+        $query = InventoryMovement::with('product')
             ->when($this->searchMovement, function ($query) {
                 $query->whereHas('product', function ($q) {
                     $q->where('nombre', 'like', '%' . $this->searchMovement . '%');
                 })->orWhere('reason', 'like', '%' . $this->searchMovement . '%')
-                  ->orWhere('reference_number', 'like', '%' . $this->searchMovement . '%');
-            })
-            ->orderBy($this->sortField, $this->sortDirection)
-            ->get();
+                    ->orWhere('reference_number', 'like', '%' . $this->searchMovement . '%');
+            });
+
+        // Aplicar ordenamiento
+        if ($this->sortField === 'producto') {
+            $query->join('products', 'inventory_movements.product_id', '=', 'products.id')
+                ->select('inventory_movements.*')
+                ->orderBy('products.nombre', $this->sortDirection);
+        } else {
+            $query->orderBy($this->sortField, $this->sortDirection);
+        }
+
+        $movements = $query->get();
 
         return view('livewire.movimientos.show-movements', ['movements' => $movements]);
     }
